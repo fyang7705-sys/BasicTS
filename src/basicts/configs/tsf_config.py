@@ -72,6 +72,11 @@ class BasicTSForecastingConfig(BasicTSConfig):
 
     model_config: BasicTSModelConfig = field(metadata={"help": "Model configuration. Must be specified."})
 
+    model_init_kwargs: Union[dict, None] = field(
+        default_factory=dict,
+        metadata={"help": "Extra keyword arguments passed to model constructor in addition to `model_config` (e.g., adjacency matrix)."},
+    )
+
     dataset_name: str = field(default=None, metadata={"help": "Dataset name. Must be specified if it is not in `dataset_params`."})
 
     ############################## General Configuration ##############################

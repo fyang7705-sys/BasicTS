@@ -109,6 +109,9 @@ class HybridPIBTDataset(BasicTSDataset):
         series = self._data[sid]
         history_data = series[t0: t0 + self.input_len]
         future_data = series[t0 + self.input_len: t0 + self.input_len + self.output_len]
+        # ✅ STGCN 需要 [T, N, C]
+        history_data = history_data[..., np.newaxis]
+        future_data = future_data[..., np.newaxis]
         item["inputs"] = history_data.copy() if self.memmap else history_data
         item["targets"] = future_data.copy() if self.memmap else future_data
 

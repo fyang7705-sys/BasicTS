@@ -44,7 +44,8 @@ class Builder:
         """
 
         logger.info("Building model.")
-        model = cfg.model(cfg.model_config)
+        model_init_kwargs = getattr(cfg, "model_init_kwargs", None) or {}
+        model = cfg.model(cfg.model_config, **model_init_kwargs)
         model = to_device(model)
 
         # complie model
